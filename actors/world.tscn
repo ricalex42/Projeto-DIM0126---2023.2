@@ -1,0 +1,83 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2x5y7teylnpv"]
+
+[ext_resource type="PackedScene" uid="uid://c3mkmue6hghe5" path="res://actors/player_node.tscn" id="1_vld7f"]
+[ext_resource type="PackedScene" uid="uid://dve2yse2kbkx7" path="res://actors/npc_node.tscn" id="2_t2suf"]
+[ext_resource type="PackedScene" uid="uid://babg48dir21cp" path="res://actors/Room.tscn" id="3_76mc2"]
+[ext_resource type="PackedScene" uid="uid://dpb5b0g5ukuhx" path="res://actors/health_potion.tscn" id="4_brcme"]
+
+[node name="World" type="Node2D"]
+
+[node name="player_node" parent="." instance=ExtResource("1_vld7f")]
+position = Vector2(18, 96)
+
+[node name="Camera2D" type="Camera2D" parent="player_node"]
+position = Vector2(29, -3)
+
+[node name="npcs" type="Node2D" parent="."]
+
+[node name="npc_node" parent="npcs" instance=ExtResource("2_t2suf")]
+position = Vector2(152, 480)
+
+[node name="npc_node2" parent="npcs" instance=ExtResource("2_t2suf")]
+position = Vector2(240, 336)
+
+[node name="npc_node3" parent="npcs" instance=ExtResource("2_t2suf")]
+position = Vector2(504, 264)
+
+[node name="npc_node4" parent="npcs" instance=ExtResource("2_t2suf")]
+position = Vector2(496, 88)
+
+[node name="npc_node5" parent="npcs" instance=ExtResource("2_t2suf")]
+position = Vector2(160, 152)
+
+[node name="npc_node6" parent="npcs" instance=ExtResource("2_t2suf")]
+position = Vector2(93, 37)
+
+[node name="items" type="Node2D" parent="."]
+
+[node name="health_potion" parent="items" instance=ExtResource("4_brcme")]
+position = Vector2(275, 107)
+
+[node name="health_potion2" parent="items" instance=ExtResource("4_brcme")]
+position = Vector2(480, 320)
+
+[node name="health_potion3" parent="items" instance=ExtResource("4_brcme")]
+position = Vector2(488, 128)
+
+[node name="health_potion4" parent="items" instance=ExtResource("4_brcme")]
+position = Vector2(128, 240)
+
+[node name="TileMap" parent="." instance=ExtResource("3_76mc2")]
+z_index = -10
+
+[node name="TileMap2" parent="." instance=ExtResource("3_76mc2")]
+z_index = -10
+position = Vector2(320, 0)
+
+[node name="TileMap3" parent="." instance=ExtResource("3_76mc2")]
+z_index = -10
+position = Vector2(0, 192)
+
+[node name="TileMap4" parent="." instance=ExtResource("3_76mc2")]
+z_index = -10
+position = Vector2(320, 192)
+
+[node name="TileMap5" parent="." instance=ExtResource("3_76mc2")]
+z_index = -10
+position = Vector2(640, 0)
+
+[node name="TileMap6" parent="." instance=ExtResource("3_76mc2")]
+z_index = -10
+position = Vector2(640, 192)
+
+[node name="TileMap7" parent="." instance=ExtResource("3_76mc2")]
+z_index = -10
+position = Vector2(0, 384)
+
+[node name="TileMap8" parent="." instance=ExtResource("3_76mc2")]
+z_index = -10
+position = Vector2(320, 384)
+
+[node name="TileMap9" parent="." instance=ExtResource("3_76mc2")]
+z_index = -10
+position = Vector2(640, 384)
