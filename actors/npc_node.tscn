@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://actors/npcFollow.gd" id="5_garya"]
 [ext_resource type="Script" path="res://actors/npcAttack.gd" id="6_761pd"]
 [ext_resource type="Script" path="res://actors/npcSearchHeal.gd" id="7_rkt63"]
-[ext_resource type="Script" path="res://DebugLines.gd" id="8_sc41c"]
+[ext_resource type="Script" path="res://actors/DebugLines.gd" id="8_sc41c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_467n1"]
 atlas = ExtResource("2_ttd2h")
