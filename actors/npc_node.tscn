@@ -160,10 +160,6 @@ script = ExtResource("6_761pd")
 script = ExtResource("7_rkt63")
 npc = NodePath("../..")
 
-[node name="DebugLines" type="Node2D" parent="."]
-visible = false
-script = ExtResource("8_sc41c")
-
 [node name="HealthBar" type="ProgressBar" parent="."]
 z_index = -1
 texture_filter = 2
@@ -181,6 +177,10 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_1dbt7")
+
+[node name="DebugLines" type="Node2D" parent="."]
+visible = false
+script = ExtResource("8_sc41c")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/NPCAttack" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="StateMachine/NPCAttack" method="_on_animated_sprite_2d_animation_looped"]
