@@ -17,7 +17,9 @@ func run():
 #		print("Start.h: ", npc_goal_distance_estimate)
 		
 		var path = a_star(npc_current_position, npc_target_position)
-		print(path)
+		#print(path)
+		for i in path:
+			print(i.coord)
 		success()
 
 func success():
@@ -47,13 +49,15 @@ func a_star(start_position: Vector2, goal_position: Vector2):
 	while open.size() > 0:
 		print("loop: ", g_counter)
 		#var N = remove_lowest_f(open)
+#		for x in open:
+#			print(x)
 		var N = get_lowest_fn(open)
-		print(N)
+		#print(N)
 		
 		if N.coord == goal_position:
 			return path_to(N)
 		
-		closed.append(N)
+		closed.push_front(N)
 		
 		# up down left right
 		#-----------------
@@ -66,14 +70,19 @@ func a_star(start_position: Vector2, goal_position: Vector2):
 		var neighbours = [tempUpTile, tempDownTile, tempLeftTile, tempRightTile]
 		#var neighbours2 = find_valid_neighbours(N)
 		
+		#print(closed)
+		
 		for child in neighbours:
-			if child not in closed:
-				#var child_g = g_counter
-				#var child_h = manhattan_distance(child, goal_position)
+			var check = -1
+			for i in closed:
+				if i.coord == child.coord:
+					check = 1
+				pass
+			if check == -1:
 				child.parent = N
-				child.g = N.g + g_counter
+				child.g = N.g + 1
 				child.h = manhattan_distance(child.coord, goal_position)
-				open.append(child)
+				open.push_front(child)
 		
 		g_counter += 1
 	
@@ -109,15 +118,29 @@ func scene_to_tile_coordinate(scene_position: Vector2, tile_size: Vector2) -> Ve
 
 func get_lowest_fn(open_list : Array):
 	var lowest_f = 1000
+	var current_g = open_list[0].g
 	var lowest_node = null
-	print("list before erase: ", open_list)
+	var index_of_lowest
 	for tile in open_list:
 		var f = tile.g + tile.h
+		#print("O f(n) de ", tile, "eh: ", f)
 		if f < lowest_f:
 			lowest_f = f
 			lowest_node = tile
 			pass
+		elif f == lowest_f:
+			if tile.g > current_g:
+				lowest_f = f
+				lowest_node = tile
+			elif tile.g == current_g:
+				if current_g % 2 == 0:
+					lowest_f = f
+					lowest_node = tile
+				pass
+				
+		#print("O lowest tile e: ", lowest_f)
 	pass
-	open_list.erase(open_list.find(lowest_node))
-	print("list after erase: ", open_list)
+	#print("find result: ", open_list.find(lowest_node))
+	open_list.remove_at(open_list.find(lowest_node))
+	#print("lowest node: ", lowest_node.coord)
 	return lowest_node
