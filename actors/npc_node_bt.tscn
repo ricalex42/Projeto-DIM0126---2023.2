@@ -173,8 +173,9 @@ script = ExtResource("4_i1vpf")
 script = ExtResource("5_d0uqk")
 npc = NodePath("../../..")
 
-[node name="Leaf_MoverParaTile" type="Node" parent="BehaviourTree/Seq_Procurar_Astar"]
+[node name="Leaf_MoverParaTile" type="Node" parent="BehaviourTree/Seq_Procurar_Astar" node_paths=PackedStringArray("npc")]
 script = ExtResource("6_yow10")
+npc = NodePath("../../..")
 
 [node name="Seq_Perserguir" type="Node" parent="BehaviourTree"]
 script = ExtResource("4_i1vpf")

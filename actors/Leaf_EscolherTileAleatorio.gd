@@ -20,7 +20,7 @@ func run():
 		$"../..".move_path = path
 		#print(path)
 		for i in path:
-			print(i.coord)
+			print(i)
 		success()
 
 func success():
@@ -94,7 +94,7 @@ func path_to(node):
 	var path = []
 	var current = node
 	while current != null:
-		path.insert(0, current)
+		path.insert(0, current.coord)
 		current = current.parent
 	
 	return path
