@@ -7,28 +7,17 @@ class_name Leaf_EscolherTileAleatorio
 func run():
 	status = RUNNING
 	if status == RUNNING:
-		print("INICIOU SEQUENCIA ESCOLHER LOCAL ALEATORIO COM A*")
-		# para teste tentar alcançar o tile 0,0
-		# 
 		var npc_current_position = scene_to_tile_coordinate(npc.global_position, Vector2(16,16))
-		var npc_target_position = Vector2(0,0)
-#		var npc_goal_distance_estimate = manhattan_distance(npc_current_position, npc_target_position)
-#		print("Start.g: ", npc_current_position)
-#		print("Start.h: ", npc_goal_distance_estimate)
-		
+		var npc_target_position = Vector2(1,1)
 		var path = a_star(npc_current_position, npc_target_position)
 		$"../..".move_path = path
-		#print(path)
-		for i in path:
-			print(i)
+#		for i in path:
+#			print(i)
 		success()
 
 func success():
 	status = SUCCEEDED
 	get_parent().child_success()
-
-func get_current_tile():
-	pass
 
 
 func a_star(start_position: Vector2, goal_position: Vector2):
@@ -48,31 +37,18 @@ func a_star(start_position: Vector2, goal_position: Vector2):
 	var g_counter = 1
 	
 	while open.size() > 0:
-		print("loop: ", g_counter)
-		#var N = remove_lowest_f(open)
+#		print("loop: ", g_counter)
 #		for x in open:
 #			print(x)
 		var N = get_lowest_fn(open)
-		#print(N)
-		
+
 		if N.coord == goal_position:
 			return path_to(N)
-		
+
 		closed.push_front(N)
 		
-		# up down left right
-		#-----------------
-		var tempUpTile = {g = null, h = null, coord = (N.coord + Vector2(0, -1)), parent = null}
-		var tempDownTile = {g = null, h = null, coord = (N.coord + Vector2(0, 1)), parent = null}
-		var tempLeftTile = {g = null, h = null, coord = (N.coord + Vector2(-1, 0)), parent = null}
-		var tempRightTile = {g = null, h = null, coord = (N.coord + Vector2(1, 0)), parent = null}
-		#-----------------
-		#var neighbours = [N + Vector2(0, -1),N + Vector2(0, 1),N + Vector2(-1, 0),N + Vector2(1, 0)]
-		var neighbours = [tempUpTile, tempDownTile, tempLeftTile, tempRightTile]
 		var neighbours2 = find_valid_neighbours(N)
-		
-		#print(closed)
-		
+
 		for child in neighbours2:
 			var check = -1
 			for i in closed:
@@ -96,7 +72,6 @@ func path_to(node):
 	while current != null:
 		path.insert(0, current.coord)
 		current = current.parent
-	
 	return path
 	pass
 
@@ -119,6 +94,7 @@ func find_valid_neighbours(N):
 	
 	return valid_neighbours
 
+
 func manhattan_distance(start_pos: Vector2, end_pos: Vector2) -> int:
 	var dx = abs(end_pos.x - start_pos.x)
 	var dy = abs(end_pos.y - start_pos.y)
@@ -138,7 +114,6 @@ func get_lowest_fn(open_list : Array):
 	var index_of_lowest
 	for tile in open_list:
 		var f = tile.g + tile.h
-		#print("O f(n) de ", tile, "eh: ", f)
 		if f < lowest_f:
 			lowest_f = f
 			lowest_node = tile
@@ -153,9 +128,6 @@ func get_lowest_fn(open_list : Array):
 					lowest_node = tile
 				pass
 				
-		#print("O lowest tile e: ", lowest_f)
 	pass
-	#print("find result: ", open_list.find(lowest_node))
 	open_list.remove_at(open_list.find(lowest_node))
-	#print("lowest node: ", lowest_node.coord)
 	return lowest_node

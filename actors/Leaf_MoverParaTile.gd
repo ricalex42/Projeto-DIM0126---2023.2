@@ -12,18 +12,6 @@ func run():
 		status = RUNNING
 	if status == RUNNING:
 		var path = $"../..".move_path
-		
-		
-#		if current_point < path.size():
-#			var target_position = path[current_point]
-#			var distance = 5 *  $"../.."._delta # Adjust speed by changing this value
-#			# Move towards the target position
-#			if npc.position.distance_to(target_position) > distance:
-#				var direction = (target_position - npc.position).normalized()
-#				npc.position += direction * distance
-#			else:
-#				npc.position = target_position
-#				current_point += 1
 		if current_point < path.size():
 			var npc_coord = scene_to_tile_coordinate(npc.global_position, Vector2(16,16))
 			var target_position = path[current_point]
@@ -34,6 +22,7 @@ func run():
 			print("direction length ", direction.length())
 			if direction.length() < 0.1:
 				#npc.position = target_position
+				path.pop_front()
 				current_point += 1
 		if(current_point >= path.size()):
 			success()

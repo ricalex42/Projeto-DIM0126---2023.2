@@ -163,8 +163,9 @@ collision_mask = 4
 position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_g2w7x")
 
-[node name="BehaviourTree" type="Node" parent="."]
+[node name="BehaviourTree" type="Node" parent="." node_paths=PackedStringArray("npc")]
 script = ExtResource("3_h68os")
+npc = NodePath("..")
 
 [node name="Seq_Procurar_Astar" type="Node" parent="BehaviourTree"]
 script = ExtResource("4_i1vpf")
@@ -180,11 +181,13 @@ npc = NodePath("../../..")
 [node name="Seq_Perserguir" type="Node" parent="BehaviourTree"]
 script = ExtResource("4_i1vpf")
 
-[node name="Leaf_EncontrarJogador" type="Node" parent="BehaviourTree/Seq_Perserguir"]
+[node name="Leaf_EncontrarJogador" type="Node" parent="BehaviourTree/Seq_Perserguir" node_paths=PackedStringArray("npc")]
 script = ExtResource("7_1f1m5")
+npc = NodePath("../../..")
 
-[node name="Leaf_PerseguirJogador" type="Node" parent="BehaviourTree/Seq_Perserguir"]
+[node name="Leaf_PerseguirJogador" type="Node" parent="BehaviourTree/Seq_Perserguir" node_paths=PackedStringArray("npc")]
 script = ExtResource("8_nlk17")
+npc = NodePath("../../..")
 
 [node name="Seq_Procurar" type="Node" parent="BehaviourTree"]
 script = ExtResource("4_i1vpf")
