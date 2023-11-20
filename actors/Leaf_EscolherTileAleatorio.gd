@@ -17,6 +17,7 @@ func run():
 #		print("Start.h: ", npc_goal_distance_estimate)
 		
 		var path = a_star(npc_current_position, npc_target_position)
+		$"../..".move_path = path
 		#print(path)
 		for i in path:
 			print(i.coord)
@@ -68,11 +69,11 @@ func a_star(start_position: Vector2, goal_position: Vector2):
 		#-----------------
 		#var neighbours = [N + Vector2(0, -1),N + Vector2(0, 1),N + Vector2(-1, 0),N + Vector2(1, 0)]
 		var neighbours = [tempUpTile, tempDownTile, tempLeftTile, tempRightTile]
-		#var neighbours2 = find_valid_neighbours(N)
+		var neighbours2 = find_valid_neighbours(N)
 		
 		#print(closed)
 		
-		for child in neighbours:
+		for child in neighbours2:
 			var check = -1
 			for i in closed:
 				if i.coord == child.coord:
@@ -102,7 +103,21 @@ func path_to(node):
 
 func find_valid_neighbours(N):
 	var tile_coord = N.coord
-	pass
+	var tempUpTile = {g = null, h = null, coord = (N.coord + Vector2(0, -1)), parent = null}
+	var tempDownTile = {g = null, h = null, coord = (N.coord + Vector2(0, 1)), parent = null}
+	var tempLeftTile = {g = null, h = null, coord = (N.coord + Vector2(-1, 0)), parent = null}
+	var tempRightTile = {g = null, h = null, coord = (N.coord + Vector2(1, 0)), parent = null}
+	# check up tile
+	var temp_neighbours = [tempUpTile, tempDownTile, tempLeftTile, tempRightTile]
+	var valid_neighbours = []
+	
+	var w_tilemap = get_parent().get_parent().get_parent().get_parent().get_parent().get_node("TileMap")
+	for neigh in temp_neighbours:
+		if(w_tilemap.get_cell_source_id(0, neigh.coord) != -1):
+			#print(neigh.coord, "is valid")
+			valid_neighbours.append(neigh)
+	
+	return valid_neighbours
 
 func manhattan_distance(start_pos: Vector2, end_pos: Vector2) -> int:
 	var dx = abs(end_pos.x - start_pos.x)

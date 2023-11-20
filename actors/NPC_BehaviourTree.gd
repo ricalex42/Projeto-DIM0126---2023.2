@@ -4,6 +4,7 @@ class_name NPC_BehaviourTree
 
 # essa BT terá 3 estados: procurar, perseguir e morrer
 var target = Vector2()
+var move_path = []
 
 func _ready():
 	tree = self
